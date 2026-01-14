@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>قائمة العمال | تأجير العمال الموهوبين - تزنيت</title>
+<style>
+body { font-family: Arial, sans-serif; direction: rtl; background: #f4f4f4; margin:0; padding:0;}
+header { background: #1e293b; color: white; padding: 15px; text-align:center; font-size:24px;}
+.container { width:90%; max-width:1000px; margin:20px auto;}
+.worker-card { background:white; padding:15px; margin-bottom:15px; border-radius:10px; display:flex; align-items:center; gap:15px; box-shadow:0 2px 5px rgba(0,0,0,0.1);}
+.worker-card img { width:100px; height:100px; border-radius:50%; object-fit:cover;}
+.worker-info { flex:1;}
+.worker-info h3 { margin:0; font-size:20px;}
+.worker-info p { margin:5px 0;}
+button { background:#1e293b; color:white; border:none; padding:10px 15px; border-radius:5px; cursor:pointer;}
+button:hover { background:#334155;}
+nav { background: #334155; display: flex; justify-content: center; gap: 20px; padding: 10px;}
+nav a { color: white; text-decoration: none; font-size: 18px;}
+nav a:hover { text-decoration: underline;}
+</style>
+</head>
+<body>
+
+<header>قائمة العمال - تأجير العمال الموهوبين</header>
+<nav>
+    <a href="index.html">الرئيسية</a>
+    <a href="workers.html">العمال</a>
+    <a href="customers.html">أرسل طلبك</a>
+    <a href="dashboard.html">لوحة التحكم</a>
+</nav>
+
+<div class="container">
+
+    <div class="worker-card">
+        <img src="worker1.jpg" alt="عامل 1">
+        <div class="worker-info">
+            <h3>محمد البطل</h3>
+            <p>مهارة: نجارة</p>
+            <p>الخبرة: 5 سنوات</p>
+        </div>
+        <button onclick="goToContact()">استئجار</button>
+    </div>
+
+    <div class="worker-card">
+        <img src="worker2.jpg" alt="عامل 2">
+        <div class="worker-info">
+            <h3>أسماء السعدية</h3>
+            <p>مهارة: خياطة وتصميم</p>
+            <p>الخبرة: 3 سنوات</p>
+        </div>
+        <button onclick="goToContact()">استئجار</button>
+    </div>
+
+    <div class="worker-card">
+        <img src="worker3.jpg" alt="عامل 3">
+        <div class="worker-info">
+            <h3>سعيد المغربي</h3>
+            <p>مهارة: صباغة وتجديد المنازل</p>
+            <p>الخبرة: 7 سنوات</p>
+        </div>
+        <button onclick="goToContact()">استئجار</button>
+    </div>
+
+</div>
+
+<script>
+function goToContact() {
+    window.location.href = "customers.html#contactForm";
+}
+</script>
+</body>
+</html>
