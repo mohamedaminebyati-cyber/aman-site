@@ -1,204 +1,718 @@
-
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>لوحة تحكم العامل</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة تواصل العمال وأصحاب العمل - تزنيت</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c5aa0;
+            --secondary-color: #4CAF50;
+            --accent-color: #ff9800;
+            --light-color: #f5f5f5;
+            --dark-color: #333;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
 
-<style>
-body{
-    margin:0;
-    font-family: Tahoma, Arial, sans-serif;
-    direction: rtl;
-    background:#f3f4f6;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-/* ===== الهيدر ===== */
-.header{
-    background:#ffffff;
-    padding:15px 20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    box-shadow:0 2px 5px rgba(0,0,0,.05);
-}
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
 
-.header h2{
-    margin:0;
-    font-size:18px;
-    color:#065f46;
-}
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-.user{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-.avatar{
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    background:#0f766e;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:bold;
-}
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
 
-/* ===== القائمة ===== */
-.menu{
-    display:grid;
-    grid-template-columns: repeat(3,1fr);
-    gap:15px;
-    padding:20px;
-}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
 
-.menu .item{
-    background:#fff;
-    border-radius:12px;
-    padding:15px 5px;
-    text-align:center;
-    font-size:14px;
-    box-shadow:0 2px 8px rgba(0,0,0,.05);
-}
+        .logo i {
+            font-size: 2rem;
+        }
 
-.menu .active{
-    background:#e6fffa;
-    color:#065f46;
-    font-weight:bold;
-}
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
 
-/* ===== الرسائل ===== */
-.messages-box{
-    background:#fff;
-    margin:0 20px 20px;
-    border-radius:16px;
-    padding:15px;
-}
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
 
-.messages-box h3{
-    margin:0;
-    color:#065f46;
-}
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
 
-.new-chat{
-    background:#0f766e;
-    color:#fff;
-    border:none;
-    padding:10px 15px;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:14px;
-    margin:10px 0;
-}
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
 
-.search{
-    width:100%;
-    padding:10px;
-    margin-bottom:10px;
-    border-radius:10px;
-    border:1px solid #ddd;
-}
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-/* ===== عنصر رسالة ===== */
-.chat{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 0;
-    border-bottom:1px solid #eee;
-}
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
 
-.chat:last-child{
-    border-bottom:none;
-}
+        .btn-primary:hover {
+            background-color: #234a8a;
+        }
 
-.circle{
-    width:38px;
-    height:38px;
-    border-radius:50%;
-    background:#0f766e;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:bold;
-}
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
 
-.content{
-    flex:1;
-}
+        .btn-secondary:hover {
+            background-color: #3d8b40;
+        }
 
-.name{
-    font-weight:bold;
-    font-size:14px;
-}
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
 
-.msg{
-    font-size:13px;
-    color:#555;
-}
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
 
-.time{
-    font-size:12px;
-    color:#999;
-}
-</style>
+        /* Hero Section */
+        .hero {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: #555;
+        }
+
+        /* Platform Sections */
+        .platform-sections {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .section-card {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .section-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .section-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .section-content {
+            padding: 25px;
+        }
+
+        /* Landing Page Section */
+        .features-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .features-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .features-list i {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        /* Dashboard Section */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .welcome-message {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .dashboard-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            background-color: #eef5ff;
+        }
+
+        .menu-item i {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            width: 30px;
+        }
+
+        .menu-item span {
+            font-weight: 500;
+        }
+
+        .badge {
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            margin-right: auto;
+        }
+
+        /* Messaging System */
+        .messaging-system {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .messaging-system h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .search-conversations {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .conversation-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .conversation {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .conversation:hover {
+            background-color: #f5f9ff;
+        }
+
+        .conversation.active {
+            background-color: #eef5ff;
+            border-right: 4px solid var(--primary-color);
+        }
+
+        .conversation-avatar {
+            width: 50px;
+            height: 50px;
+            background-color: #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-left: 15px;
+        }
+
+        .conversation-info {
+            flex: 1;
+        }
+
+        .conversation-name {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .conversation-company {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 3px;
+        }
+
+        .conversation-time {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .conversation-preview {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+
+        .notification-count {
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-right: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-card {
+                min-width: 100%;
+            }
+            
+            .auth-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
-
 <body>
-
-<!-- ===== الهيدر ===== -->
-<div class="header">
-    <h2>لوحة تحكم العامل</h2>
-    <div class="user">
-        <div>
-            <div>عامل جديد</div>
-            <small>بناء</small>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-hard-hat"></i>
+                <span>منصة تواصل العمال وأصحاب العمل</span>
+            </div>
+            
+            <div class="nav-links">
+                <a href="#home">الرئيسية</a>
+                <a href="#about">عن المنصة</a>
+                <a href="#how-it-works">كيف تعمل</a>
+                <a href="#contact">تواصل معنا</a>
+            </div>
+            
+            <div class="auth-buttons">
+                <button class="btn btn-outline" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                </button>
+                <button class="btn btn-primary" id="registerBtn">
+                    <i class="fas fa-user-plus"></i> إنشاء حساب
+                </button>
+            </div>
         </div>
-        <div class="avatar">ع</div>
-    </div>
-</div>
+    </header>
 
-<!-- ===== القائمة ===== -->
-<div class="menu">
-    <div class="item">🏠<br>نظرة عامة</div>
-    <div class="item">💼<br>الوظائف المتاحة</div>
-    <div class="item">📋<br>وظائفي</div>
-    <div class="item">💰<br>الأرباح</div>
-    <div class="item active">💬<br>الرسائل</div>
-    <div class="item">👤<br>الملف الشخصي</div>
-</div>
-
-<!-- ===== الرسائل ===== -->
-<div class="messages-box">
-    <h3>نظام المراسلة</h3>
-    <button class="new-chat">+ محادثة جديدة</button>
-
-    <input type="text" class="search" placeholder="بحث في المحادثات...">
-
-    <div class="chat">
-        <div class="circle">م</div>
-        <div class="content">
-            <div class="name">محمد صاحب العمل</div>
-            <div class="msg">مرحبا، هل يمكنك البدء غداً؟</div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>منصة تواصل العمال وأصحاب العمل</h1>
+            <p>منصة متكاملة تربط بين العمال المهرة وأصحاب العمل في تزنيت وضواحيها. انضم الآن واكتشف فرص العمل المتاحة أو وجد العمالة الماهرة لمشاريعك.</p>
+            <button class="btn btn-secondary" id="joinAsWorkerBtn">
+                <i class="fas fa-tools"></i> انضم كعامل
+            </button>
         </div>
-        <div class="time">10:30</div>
-    </div>
+    </section>
 
-    <div class="chat">
-        <div class="circle">ش</div>
-        <div class="content">
-            <div class="name">شركة البناء الحديث</div>
-            <div class="msg">نحتاجك لمشروع جديد</div>
+    <!-- Platform Sections -->
+    <div class="container platform-sections">
+        <!-- Landing Page Section -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2><i class="fas fa-bullhorn"></i> انضم كعامل مهرة</h2>
+            </div>
+            <div class="section-content">
+                <p>انضم كعامل مهرة لتقديم خدماتك والحصول على فرص عمل في تزنيت وضواحيها</p>
+                
+                <ul class="features-list">
+                    <li><i class="fas fa-check-circle"></i> عرض مهاراتك وخدماتك</li>
+                    <li><i class="fas fa-check-circle"></i> استقبال عروض العمل مباشرة</li>
+                    <li><i class="fas fa-check-circle"></i> التفاوض على الأسعار والشروط</li>
+                    <li><i class="fas fa-check-circle"></i> تقييم أصحاب العمل</li>
+                    <li><i class="fas fa-check-circle"></i> متابعة أرباحك ومشاريعك</li>
+                    <li><i class="fas fa-check-circle"></i> شهادة تميز للعمال المتفوقين</li>
+                </ul>
+                
+                <button class="btn btn-primary" id="workerLoginBtn" style="width: 100%;">
+                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول كعامل
+                </button>
+            </div>
         </div>
-        <div class="time">أمس</div>
+        
+        <!-- Dashboard Section -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2><i class="fas fa-tachometer-alt"></i> لوحة تحكم العامل</h2>
+            </div>
+            <div class="section-content">
+                <div class="dashboard-header">
+                    <div class="welcome-message">مرحباً، عامل جديد | بناء</div>
+                    <button class="btn btn-primary" id="buildBtn">
+                        <i class="fas fa-hammer"></i> بناء
+                    </button>
+                </div>
+                
+                <div class="dashboard-menu">
+                    <div class="menu-item">
+                        <i class="fas fa-fire"></i>
+                        <span>الوظائف المتاحة</span>
+                        <div class="badge">3</div>
+                    </div>
+                    <div class="menu-item">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>الأرباح</span>
+                    </div>
+                    <div class="menu-item">
+                        <i class="fas fa-globe"></i>
+                        <span>الرسائل</span>
+                        <div class="badge">2</div>
+                    </div>
+                    <div class="menu-item">
+                        <i class="fas fa-user-circle"></i>
+                        <span>الملف الشخصي</span>
+                    </div>
+                </div>
+                
+                <div class="messaging-system">
+                    <h3><i class="fas fa-comments"></i> نظام المراسلة</h3>
+                    
+                    <input type="text" class="search-conversations" placeholder="بحث في المحادثات...">
+                    
+                    <div class="conversation-list">
+                        <div class="conversation active">
+                            <div class="conversation-avatar">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="conversation-info">
+                                <div class="conversation-name">محمد صاحب العمل</div>
+                                <div class="conversation-company">شركة البناء الحديث</div>
+                                <div class="conversation-preview">مرحباً، هل يمكنك البدء غداً؟</div>
+                                <div class="conversation-time">10:30</div>
+                            </div>
+                            <div class="notification-count">2</div>
+                        </div>
+                        
+                        <div class="conversation">
+                            <div class="conversation-avatar">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="conversation-info">
+                                <div class="conversation-name">أحمد المدير</div>
+                                <div class="conversation-company">مقاولات العمري</div>
+                                <div class="conversation-preview">هل أنت متاح الأسبوع القادم؟</div>
+                                <div class="conversation-time">أمس</div>
+                            </div>
+                        </div>
+                        
+                        <div class="conversation">
+                            <div class="conversation-avatar">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="conversation-info">
+                                <div class="conversation-name">سالم المالك</div>
+                                <div class="conversation-company">مشروع سكني</div>
+                                <div class="conversation-preview">أحتاج إلى عامل سباكة</div>
+                                <div class="conversation-time">١٥ مايو</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-</div>
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>عن المنصة</h3>
+                    <p>منصة متكاملة تربط بين العمال المهرة وأصحاب العمل في تزنيت وضواحيها. نسعى لتسهيل عملية البحث عن العمل وتوفير العمالة الموثوقة.</p>
+                    <div style="margin-top: 15px;">
+                        <button class="btn btn-outline" style="color: white; border-color: white;">
+                            <i class="fas fa-download"></i> حمل التطبيق
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#about">عن المنصة</a></li>
+                        <li><a href="#how-it-works">كيف تعمل</a></li>
+                        <li><a href="#contact">تواصل معنا</a></li>
+                        <li><a href="#privacy">سياسة الخصوصية</a></li>
+                        <li><a href="#terms">شروط الاستخدام</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>تواصل معنا</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> تزنيت، المغرب</li>
+                        <li><i class="fas fa-phone"></i> +212 5XX XXX XXX</li>
+                        <li><i class="fas fa-envelope"></i> info@workers-platform.ma</li>
+                    </ul>
+                    <div style="margin-top: 20px; display: flex; gap: 10px;">
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                © 2023 منصة تواصل العمال وأصحاب العمل. جميع الحقوق محفوظة.
+            </div>
+        </div>
+    </footer>
 
+    <script>
+        // Demo interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Buttons click events
+            const loginBtn = document.getElementById('loginBtn');
+            const registerBtn = document.getElementById('registerBtn');
+            const joinAsWorkerBtn = document.getElementById('joinAsWorkerBtn');
+            const workerLoginBtn = document.getElementById('workerLoginBtn');
+            const buildBtn = document.getElementById('buildBtn');
+            
+            loginBtn.addEventListener('click', function() {
+                alert('نموذج تسجيل الدخول سيفتح هنا. هذه نسخة توضيحية.');
+            });
+            
+            registerBtn.addEventListener('click', function() {
+                alert('نموذج إنشاء حساب سيفتح هنا. هذه نسخة توضيحية.');
+            });
+            
+            joinAsWorkerBtn.addEventListener('click', function() {
+                alert('أنت الآن تنتقل إلى صفحة انضمام العمال. هذه نسخة توضيحية.');
+            });
+            
+            workerLoginBtn.addEventListener('click', function() {
+                alert('تسجيل الدخول كعامل. هذه نسخة توضيحية.');
+            });
+            
+            buildBtn.addEventListener('click', function() {
+                alert('بدء عملية بناء/إعلان عن خدمة جديدة. هذه نسخة توضيحية.');
+            });
+            
+            // Conversation click events
+            const conversations = document.querySelectorAll('.conversation');
+            conversations.forEach(conversation => {
+                conversation.addEventListener('click', function() {
+                    // Remove active class from all conversations
+                    conversations.forEach(c => c.classList.remove('active'));
+                    // Add active class to clicked conversation
+                    this.classList.add('active');
+                    
+                    // In a real app, this would load the conversation messages
+                    const name = this.querySelector('.conversation-name').textContent;
+                    alert(`تحميل محادثة مع ${name}. هذه نسخة توضيحية.`);
+                });
+            });
+            
+            // Menu items click events
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const itemName = this.querySelector('span').textContent;
+                    alert(`فتح قسم: ${itemName}. هذه نسخة توضيحية.`);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
+             
